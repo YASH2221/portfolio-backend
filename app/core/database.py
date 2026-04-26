@@ -7,15 +7,21 @@ database_url = settings.DATABASE_URL
 if database_url.startswith("postgresql://"):
     database_url = database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
 
-engine = create_async_engine(
-    database_url,
-    echo=False,
-    pool_size=5,
-    max_overflow=10,
-    pool_pre_ping=True,
-    pool_recycle=300,
-    connect_args={"ssl": "require"} if "dpg-" in database_url else {}
-)
+if database_url.startswith("sqlite"):
+    engine = create_async_engine(
+        database_url,
+        echo=False
+    )
+else:
+    engine = create_async_engine(
+        database_url,
+        echo=False,
+        pool_size=5,
+        max_overflow=10,
+        pool_pre_ping=True,
+        pool_recycle=300,
+        connect_args={"ssl": "require"} if "dpg-" in database_url else {}
+    )
 
 async_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
 

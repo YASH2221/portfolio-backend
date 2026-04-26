@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, ARRAY, Float
+from sqlalchemy import Column, Integer, String, Text, Boolean, DateTime, JSON, Float
 from sqlalchemy.sql import func
 from app.core.database import Base
 
@@ -13,10 +13,10 @@ class Project(Base):
     full_description = Column(Text)
     problem_statement = Column(Text)
     challenges = Column(Text)
-    tech_stack = Column(ARRAY(String))
+    tech_stack = Column(JSON)
     category = Column(String(50))
     thumbnail_url = Column(String(500))
-    screenshots = Column(ARRAY(String))
+    screenshots = Column(JSON)
     live_url = Column(String(500))
     github_url = Column(String(500))
     featured = Column(Boolean, default=False)
@@ -49,8 +49,8 @@ class Journey(Base):
     start_date = Column(String(20), nullable=False)
     end_date = Column(String(20))
     description = Column(Text)
-    highlights = Column(ARRAY(String))
-    tech_used = Column(ARRAY(String))
+    highlights = Column(JSON)
+    tech_used = Column(JSON)
     icon_name = Column(String(50))
     display_order = Column(Integer, default=0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

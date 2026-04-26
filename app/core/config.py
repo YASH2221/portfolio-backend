@@ -10,6 +10,11 @@ class Settings(BaseSettings):
     BACKEND_PORT: int = 8000
     CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
     ADMIN_SECRET_KEY: str = "portfolio-admin-secret"
+    
+    # SMTP Config
+    SMTP_USER: str = ""
+    SMTP_PASSWORD: str = ""
+    SMTP_RECEIVER: str = ""
 
     class Config:
         env_file = os.path.join(os.path.dirname(__file__), '..', '..', '..', '.env')
