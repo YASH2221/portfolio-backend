@@ -10,7 +10,7 @@ from app.core.config import settings
 from app.core.database import init_db, async_session
 from app.models.models import Project, Skill, Journey
 from app.api import projects, skills, journey, chat, contact
-from mangum import Mangum
+
 
 async def seed_data():
     """Seed the database with Yash's portfolio data if empty."""
@@ -331,7 +331,7 @@ app = FastAPI(
     version="1.0.0",
     lifespan=lifespan
 )
-handler = Mangum(app)
+
 
 # CORS
 app.add_middleware(
